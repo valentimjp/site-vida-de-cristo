@@ -1,0 +1,8 @@
+# Ferramentas locais (não fazem parte do site)
+MazyOS/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+.vercel
