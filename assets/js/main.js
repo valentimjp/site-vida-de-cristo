@@ -27,43 +27,6 @@ if (copyPix) {
   });
 }
 
-// Próximo culto (página inicial)
-const upcoming = document.getElementById("upcoming");
-
-if (upcoming) {
-  const services = [
-    { weekday: 0, hour: 18, minute: 30, day: "Domingo", name: "Culto de Celebração", time: "18h30" },
-    { weekday: 4, hour: 19, minute: 30, day: "Quinta-feira", name: "Culto de Ensino", time: "19h30" },
-  ];
-  const DURATION_MS = 2 * 60 * 60 * 1000; // culto conta como "acontecendo" por 2h
-  const now = new Date();
-
-  const next = services
-    .map((service) => {
-      const start = new Date(now);
-      start.setHours(service.hour, service.minute, 0, 0);
-      start.setDate(start.getDate() + ((service.weekday - now.getDay() + 7) % 7));
-      if (start.getTime() + DURATION_MS < now.getTime()) start.setDate(start.getDate() + 7);
-      return { ...service, start };
-    })
-    .sort((a, b) => a.start - b.start)[0];
-
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const startDay = new Date(next.start.getFullYear(), next.start.getMonth(), next.start.getDate());
-  const days = Math.round((startDay - today) / 86400000);
-
-  let when;
-  if (next.start <= now) when = "acontecendo agora";
-  else if (days === 0) when = "hoje";
-  else if (days === 1) when = "amanhã";
-  else when = `em ${days} dias`;
-
-  document.getElementById("upcomingDay").textContent = next.day;
-  document.getElementById("upcomingName").textContent = next.name;
-  document.getElementById("upcomingTime").textContent = next.time;
-  document.getElementById("upcomingWhen").textContent = when;
-}
-
 // Revela os elementos .reveal quando entram na tela
 const revealItems = document.querySelectorAll(".reveal");
 
