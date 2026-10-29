@@ -272,6 +272,7 @@ a {
 
 .hero__content--center .hero__text {
   max-width: 680px;
+  text-wrap: balance;
   font-size: 17px;
 }
 
