@@ -13,7 +13,8 @@
   --surface: #1a1b20;
   --line: rgba(255, 255, 255, 0.12);
   --container: 1140px;
-  --font: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --font: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Jost", "Helvetica Neue", Arial, sans-serif;
 }
 
 *,
@@ -35,6 +36,35 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Títulos, menu, botões e números usam a fonte da marca */
+h1, h2, h3,
+.btn,
+.logo__text,
+.nav__link,
+.footer__logo,
+.footer__title,
+.hero__eyebrow,
+.hero__fact-label,
+.about__year,
+.verse__text,
+.worship__day,
+.worship__time,
+.give__eyebrow,
+.give__key,
+.service__num,
+.doing__num,
+.belief__num,
+.mv__quote cite,
+.verse__ref,
+.belief__refs,
+.text-link {
+  font-family: var(--font-display);
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -53,7 +83,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-family: var(--font);
+  font-family: var(--font-display);
   font-weight: 500;
   font-size: 15px;
   line-height: 1;
@@ -395,7 +425,7 @@ a {
 .hero__title {
   margin: 0 0 26px;
   font-size: 86px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.01em;
 }
@@ -457,7 +487,7 @@ a {
 
 .service__text {
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -799,7 +829,7 @@ a {
 
 .doing__text {
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -1009,7 +1039,7 @@ a {
 
 .belief p {
   margin: 0 0 12px;
-  font-size: 16px;
+  font-size: 16.5px;
   line-height: 1.75;
   color: var(--text-light);
 }
