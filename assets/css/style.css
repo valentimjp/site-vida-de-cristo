@@ -1426,10 +1426,20 @@ a {
 
   .services__inner,
   .about__grid,
-  .mv__grid,
-  .pastors__grid {
+  .mv__grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .pastors__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .moments__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
 
   .moments__grid {
@@ -1440,10 +1450,6 @@ a {
   .moment:first-child {
     grid-row: auto;
     grid-column: span 2;
-  }
-
-  .pastors__photo {
-    max-width: 480px;
   }
 
   .verse__text {
@@ -1542,6 +1548,11 @@ a {
   .beliefs__grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .pastors__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .mv__title {
