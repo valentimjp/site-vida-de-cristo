@@ -266,6 +266,10 @@ a {
   text-align: center;
 }
 
+.hero__content--center .hero__title {
+  font-size: 76px;
+}
+
 .hero__content--center .hero__text {
   max-width: 600px;
   font-size: 17px;
