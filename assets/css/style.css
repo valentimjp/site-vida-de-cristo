@@ -1502,8 +1502,13 @@ a {
   }
 
   .hero__content {
-    padding-top: 48px;
-    padding-bottom: 72px;
+    padding-top: 24px;
+    padding-bottom: 48px;
+  }
+
+  .hero__content--center .hero__text {
+    font-size: 15.5px;
+    line-height: 1.6;
   }
 
   .hero__title,
@@ -1517,8 +1522,9 @@ a {
   }
 
   .hero__logo {
-    width: 56px;
-    height: 56px;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 10px;
   }
 
   .hero__facts {
@@ -1526,13 +1532,13 @@ a {
     gap: 0;
     width: 100%;
     max-width: 320px;
-    margin-top: 32px;
+    margin-top: 18px;
     padding-top: 0;
   }
 
   .hero__facts li {
-    gap: 4px;
-    padding: 20px 0;
+    gap: 2px;
+    padding: 13px 0;
   }
 
   .hero__facts li + li {
@@ -1541,7 +1547,7 @@ a {
   }
 
   .hero__cta {
-    margin-top: 24px;
+    margin-top: 16px;
   }
 
   .section-title {
