@@ -49,14 +49,30 @@
       </div>
     </header>
 
-    <div class="container hero__content">
-      <p class="hero__eyebrow">Ano de Edificar na Nova Aliança — 2026</p>
-      <h1 class="hero__title">Bem-vindo à<br>nossa igreja!</h1>
-      <p class="hero__text">Começamos em 2024, na sala de casa, com poucas pessoas orando e estudando a Palavra. Hoje temos nosso próprio espaço — e um lugar preparado pra você.</p>
-      <div class="hero__actions">
-        <a href="quem-somos.html" class="btn btn--primary">Conheça nossa história</a>
-        <a href="cultos.html" class="text-link">Ver horários dos cultos</a>
+    <div class="container hero__content hero__grid">
+      <div class="hero__main">
+        <p class="hero__eyebrow">Ano de Edificar na Nova Aliança — 2026</p>
+        <h1 class="hero__title">Bem-vindo à<br>nossa igreja!</h1>
+        <p class="hero__text">Começamos em 2024, na sala de casa, com poucas pessoas orando e estudando a Palavra. Hoje temos nosso próprio espaço — e um lugar preparado pra você.</p>
+        <div class="hero__actions">
+          <a href="quem-somos.html" class="btn btn--primary">Conheça nossa história</a>
+          <a href="cultos.html" class="text-link">Ver horários dos cultos</a>
+        </div>
       </div>
+
+      <!-- Próximo culto: o JS escolhe entre domingo e quinta conforme o dia de hoje -->
+      <aside class="upcoming" id="upcoming">
+        <img class="upcoming__logo" src="assets/img/logo-arvore.png" alt="" aria-hidden="true">
+        <p class="upcoming__label">Próximo culto</p>
+        <p class="upcoming__day" id="upcomingDay">Domingo</p>
+        <p class="upcoming__name" id="upcomingName">Culto de Celebração</p>
+        <p class="upcoming__time">
+          <span id="upcomingTime">18h30</span>
+          <span class="upcoming__when" id="upcomingWhen"></span>
+        </p>
+        <p class="upcoming__addr">Av. do Magistério, 605 - Lj 05<br>Portuguesa, Rio de Janeiro - RJ</p>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+do+Magist%C3%A9rio%2C+605+-+Portuguesa%2C+Rio+de+Janeiro+-+RJ%2C+21920-455" class="text-link" target="_blank" rel="noopener">Como chegar</a>
+      </aside>
     </div>
   </section>
 
