@@ -408,57 +408,6 @@ a {
   color: var(--text-light);
 }
 
-/* ---------- Quando a gente se encontra (início) ---------- */
-.next {
-  padding: 40px 0 110px;
-}
-
-.next__inner {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 70px;
-  align-items: start;
-}
-
-.next__intro p {
-  margin: 0 0 18px;
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text-muted);
-}
-
-.schedule {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 2px solid var(--gold);
-}
-
-.schedule li {
-  display: grid;
-  grid-template-columns: 150px 1fr auto;
-  align-items: baseline;
-  gap: 20px;
-  padding: 26px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.schedule__day {
-  font-size: 15px;
-  color: var(--text-muted);
-}
-
-.schedule__name {
-  font-size: 22px;
-  font-weight: 500;
-}
-
-.schedule__time {
-  font-size: 34px;
-  font-weight: 600;
-  color: var(--gold);
-}
-
 /* ---------- Ministérios (início) ---------- */
 .services {
   padding: 100px 0;
@@ -806,34 +755,6 @@ a {
   color: var(--gold);
 }
 
-.purpose {
-  padding: 90px 0;
-  background: var(--black-alt);
-  color: var(--white);
-}
-
-.purpose__inner {
-  display: grid;
-  grid-template-columns: 4fr 8fr;
-  gap: 60px;
-  align-items: start;
-}
-
-.purpose__title {
-  margin: 0;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 1.15;
-  color: var(--gold);
-}
-
-.purpose__text {
-  margin: 0;
-  font-size: 18px;
-  line-height: 1.8;
-  color: var(--text-light);
-}
-
 .doing {
   padding: 100px 0;
   background: var(--black);
@@ -931,6 +852,172 @@ a {
   font-size: 17px;
   line-height: 1.7;
   color: var(--text-light);
+}
+
+/* ---------- Missão e visão ---------- */
+.mv {
+  padding: 100px 0;
+  background: var(--black-alt);
+}
+
+.mv__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+
+.mv__title {
+  margin: 0 0 22px;
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.mv__quote {
+  margin: 0;
+  padding-left: 22px;
+  border-left: 2px solid var(--gold);
+}
+
+.mv__quote p {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--text-light);
+}
+
+.mv__quote cite {
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.mv__text {
+  margin: 0 0 18px;
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text-light);
+}
+
+/* ---------- Nossos pastores ---------- */
+.pastors {
+  padding: 100px 0;
+}
+
+.pastors__grid {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.pastors__photo {
+  aspect-ratio: 4 / 4.4;
+  background:
+    url("../img/pastores.jpg") center / cover no-repeat,
+    url("../img/logo-arvore.png") center / 120px no-repeat,
+    var(--surface);
+  border-top: 3px solid var(--gold);
+}
+
+.pastors__body p {
+  margin: 0 0 18px;
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text-light);
+}
+
+.pastors__body strong {
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.pastors__body .text-link {
+  margin-top: 8px;
+}
+
+/* ---------- Versículo em destaque ---------- */
+.verse {
+  padding: 90px 0;
+  background: var(--black-alt);
+  text-align: center;
+}
+
+.verse__text {
+  max-width: 820px;
+  margin: 0 auto 18px;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.verse__ref {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* ---------- Confissão de fé ---------- */
+.beliefs {
+  padding: 100px 0;
+  background: var(--black-alt);
+}
+
+.verse--dark {
+  background: var(--black);
+}
+
+.beliefs__head {
+  max-width: 560px;
+  margin-bottom: 50px;
+}
+
+.beliefs__head p {
+  margin: 0;
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+.beliefs__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px 56px;
+}
+
+.belief {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.belief__num {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.belief__title {
+  margin: 0 0 12px;
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.belief p {
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-light);
+}
+
+.belief .belief__refs {
+  margin: 0;
+  font-size: 14px;
+  color: var(--gold);
 }
 
 /* ---------- Página Cultos ---------- */
@@ -1307,9 +1394,10 @@ a {
     padding: 0 22px;
   }
 
-  .next__inner,
   .services__inner,
-  .about__grid {
+  .about__grid,
+  .mv__grid,
+  .pastors__grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
@@ -1324,9 +1412,12 @@ a {
     grid-column: span 2;
   }
 
-  .purpose__inner {
-    grid-template-columns: 1fr;
-    gap: 24px;
+  .pastors__photo {
+    max-width: 480px;
+  }
+
+  .verse__text {
+    font-size: 26px;
   }
 
   .doing__grid {
@@ -1418,26 +1509,23 @@ a {
     font-size: 30px;
   }
 
-  .next {
-    padding-bottom: 64px;
+  .beliefs__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
-  .schedule li {
-    grid-template-columns: 1fr auto;
-    gap: 4px 16px;
-    padding: 20px 0;
-  }
-
-  .schedule__day {
-    grid-column: 1 / -1;
-  }
-
-  .schedule__name {
-    font-size: 19px;
-  }
-
-  .schedule__time {
+  .mv__title {
     font-size: 28px;
+  }
+
+  .mv__quote p,
+  .mv__text,
+  .pastors__body p {
+    font-size: 17px;
+  }
+
+  .verse__text {
+    font-size: 22px;
   }
 
   .services,
@@ -1476,7 +1564,10 @@ a {
   }
 
   .about,
-  .purpose,
+  .mv,
+  .pastors,
+  .verse,
+  .beliefs,
   .doing,
   .visit {
     padding: 64px 0;
@@ -1490,7 +1581,6 @@ a {
     font-size: 17px;
   }
 
-  .purpose__title,
   .doing__title {
     font-size: 30px;
   }
