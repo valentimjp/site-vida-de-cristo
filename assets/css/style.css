@@ -264,6 +264,50 @@ a {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding-top: 56px;
+}
+
+/* Fotos inclinadas nas laterais do hero (só em telas largas) */
+.hero__side {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  width: 230px;
+  height: 310px;
+  background-size: cover;
+  background-position: center;
+  border: 6px solid #1a1b20;
+  outline: 1px solid rgba(201, 162, 76, 0.5);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.5);
+}
+
+.hero__side--left {
+  left: calc(50% - 690px);
+  transform: translateY(-62%) rotate(-5deg);
+  animation: sideLeft 1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.hero__side--right {
+  right: calc(50% - 690px);
+  transform: translateY(-48%) rotate(4deg);
+  animation: sideRight 1s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both;
+}
+
+@keyframes sideLeft {
+  from { opacity: 0; transform: translateY(-55%) rotate(-5deg); }
+  to { opacity: 1; transform: translateY(-62%) rotate(-5deg); }
+}
+
+@keyframes sideRight {
+  from { opacity: 0; transform: translateY(-41%) rotate(4deg); }
+  to { opacity: 1; transform: translateY(-48%) rotate(4deg); }
+}
+
+@media (min-width: 1360px) {
+  .hero__side {
+    display: block;
+  }
 }
 
 .hero__content--center .hero__title {
