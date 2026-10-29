@@ -8,7 +8,10 @@
   --white: #ffffff;
   --text-light: rgba(255, 255, 255, 0.85);
   --text-dark: #111111;
-  --text-muted: #6f6f6f;
+  --text-muted: #9b9b9b;
+  --black-alt: #15161a;
+  --surface: #1a1b20;
+  --line: rgba(255, 255, 255, 0.12);
   --container: 1140px;
   --font: "Jost", "Helvetica Neue", Arial, sans-serif;
 }
@@ -27,8 +30,8 @@ body {
 
 body {
   font-family: var(--font);
-  color: var(--text-dark);
-  background: var(--white);
+  color: var(--white);
+  background: var(--black);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -97,7 +100,7 @@ a {
   font-size: 40px;
   font-weight: 600;
   line-height: 1.15;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 .btn--sm {
@@ -294,7 +297,8 @@ a {
   max-width: 900px;
   margin: 0 auto;
   padding: 22px;
-  background: var(--white);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 4px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
 }
@@ -313,7 +317,7 @@ a {
   font-size: 32px;
   font-weight: 600;
   line-height: 1.15;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 .welcome__text {
@@ -321,7 +325,7 @@ a {
   margin: 0 0 22px;
   font-size: 16px;
   line-height: 1.65;
-  color: #555555;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .welcome__actions {
@@ -333,11 +337,11 @@ a {
 .welcome__link {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 .welcome__link:hover {
-  color: var(--gold-text);
+  color: var(--gold);
 }
 
 /* ---------- Quando a gente se encontra (início) ---------- */
@@ -363,7 +367,7 @@ a {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 2px solid var(--text-dark);
+  border-top: 2px solid var(--gold);
 }
 
 .schedule li {
@@ -372,7 +376,7 @@ a {
   align-items: baseline;
   gap: 20px;
   padding: 26px 0;
-  border-bottom: 1px solid #e2e2e2;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .schedule__day {
@@ -388,13 +392,13 @@ a {
 .schedule__time {
   font-size: 34px;
   font-weight: 600;
-  color: var(--gold-text);
+  color: var(--gold);
 }
 
 /* ---------- Ministérios (início) ---------- */
 .services {
   padding: 100px 0;
-  background: #f4f3f0;
+  background: var(--black-alt);
 }
 
 .services__inner {
@@ -409,7 +413,7 @@ a {
   margin: 0 0 32px;
   font-size: 16px;
   line-height: 1.7;
-  color: #444444;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .services__grid {
@@ -420,7 +424,7 @@ a {
 
 .service {
   padding-top: 18px;
-  border-top: 1px solid #d6d3cc;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .service__num {
@@ -428,21 +432,21 @@ a {
   margin-bottom: 12px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--gold-text);
+  color: var(--gold);
 }
 
 .service__title {
   margin: 0 0 8px;
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 .service__text {
   margin: 0;
   font-size: 15px;
   line-height: 1.6;
-  color: #555555;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* ---------- Momentos (início) ---------- */
@@ -726,7 +730,7 @@ a {
   margin: 0 0 24px;
   font-size: 19px;
   line-height: 1.75;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 .about__story p:last-child {
@@ -735,12 +739,12 @@ a {
 
 .about__story strong {
   font-weight: 600;
-  color: var(--gold-text);
+  color: var(--gold);
 }
 
 .purpose {
   padding: 90px 0;
-  background: var(--black);
+  background: var(--black-alt);
   color: var(--white);
 }
 
@@ -768,7 +772,7 @@ a {
 
 .doing {
   padding: 100px 0;
-  background: #f4f3f0;
+  background: var(--black);
 }
 
 .doing__head {
@@ -779,7 +783,7 @@ a {
   margin: 0;
   font-size: 40px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 .doing__grid {
@@ -790,7 +794,7 @@ a {
 
 .doing__item {
   padding-top: 18px;
-  border-top: 1px solid #d6d3cc;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .doing__num {
@@ -798,21 +802,21 @@ a {
   margin-bottom: 14px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--gold-text);
+  color: var(--gold);
 }
 
 .doing__name {
   margin: 0 0 10px;
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 .doing__text {
   margin: 0;
   font-size: 15px;
   line-height: 1.7;
-  color: #555555;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* História com o ano em destaque */
@@ -840,7 +844,7 @@ a {
 
 .visit {
   padding: 90px 0;
-  background: var(--black);
+  background: var(--black-alt);
   text-align: center;
 }
 
@@ -868,7 +872,7 @@ a {
 /* ---------- Página Cultos ---------- */
 .worship {
   padding: 100px 0;
-  background: linear-gradient(180deg, var(--white) 0%, #f2f2f2 100%);
+  background: var(--black);
 }
 
 .worship__grid {
@@ -889,7 +893,7 @@ a {
 .worship__card {
   width: 100%;
   padding: 48px 40px;
-  background: var(--black);
+  background: var(--surface);
   border-top: 3px solid var(--gold);
   color: var(--white);
 }
@@ -937,7 +941,7 @@ a {
 
 .location {
   padding: 90px 0;
-  background: var(--black);
+  background: var(--black-alt);
   color: var(--white);
 }
 
@@ -978,7 +982,7 @@ a {
 /* ---------- Página Ofertas ---------- */
 .give {
   padding: 100px 0;
-  background: linear-gradient(180deg, var(--white) 0%, #f2f2f2 100%);
+  background: var(--black);
 }
 
 .give__card {
@@ -991,7 +995,7 @@ a {
   max-width: 960px;
   margin: 0 auto;
   padding: 56px;
-  background: var(--black);
+  background: var(--surface);
   border-top: 3px solid var(--gold);
   color: var(--white);
 }
