@@ -265,6 +265,11 @@ a {
   align-items: center;
   text-align: center;
   padding-top: 56px;
+  padding-bottom: 110px;
+}
+
+.hero__content--center .hero__eyebrow {
+  font-size: 21px;
 }
 
 /* Fotos inclinadas nas laterais do hero (só em telas largas) */
@@ -363,6 +368,23 @@ a {
   font-size: 17px;
   color: var(--white);
 }
+
+.hero__fact-link {
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 162, 76, 0.6);
+  text-underline-offset: 5px;
+  transition: color 0.2s ease;
+}
+
+.hero__fact-link:hover {
+  color: var(--gold);
+}
+
+.hero__cta {
+  margin-top: 40px;
+  padding: 16px 40px;
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1s both;
+}
 .hero__eyebrow {
   margin: 0 0 18px;
   font-size: 16px;
@@ -384,68 +406,6 @@ a {
   font-size: 16px;
   line-height: 1.65;
   color: var(--text-light);
-}
-
-/* ---------- Primeira vez (card sobre o hero) ---------- */
-.welcome {
-  position: relative;
-  z-index: 5;
-  margin-top: -100px;
-  padding-bottom: 80px;
-}
-
-.welcome__card {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 22px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
-}
-
-.welcome__media {
-  flex: 0 0 280px;
-  align-self: stretch;
-  min-height: 180px;
-  background-color: #d9dde3;
-  background-size: cover;
-  background-position: center;
-}
-
-.welcome__title {
-  margin: 0 0 10px;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.15;
-  color: var(--white);
-}
-
-.welcome__text {
-  max-width: 500px;
-  margin: 0 0 22px;
-  font-size: 16px;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.welcome__actions {
-  display: flex;
-  align-items: center;
-  gap: 26px;
-}
-
-.welcome__link {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--white);
-}
-
-.welcome__link:hover {
-  color: var(--gold);
 }
 
 /* ---------- Quando a gente se encontra (início) ---------- */
@@ -1338,7 +1298,8 @@ a {
 }
 
 @media (max-width: 991px) {
-  .hero__title {
+  .hero__title,
+  .hero__content--center .hero__title {
     font-size: 58px;
   }
 
@@ -1411,12 +1372,18 @@ a {
   }
 
   .hero__content {
-    padding-top: 64px;
-    padding-bottom: 160px;
+    padding-top: 48px;
+    padding-bottom: 72px;
   }
 
-  .hero__title {
-    font-size: 42px;
+  .hero__title,
+  .hero__content--center .hero__title {
+    font-size: 40px;
+  }
+
+  .hero__content--center .hero__eyebrow {
+    font-size: 16px;
+    text-wrap: balance;
   }
 
   .hero__logo {
@@ -1440,26 +1407,6 @@ a {
 
   .section-title {
     font-size: 30px;
-  }
-
-  .welcome {
-    margin-top: -90px;
-  }
-
-  .welcome__card {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
-    padding: 16px;
-  }
-
-  .welcome__media {
-    flex-basis: auto;
-    height: 180px;
-  }
-
-  .welcome__title {
-    font-size: 26px;
   }
 
   .next {
