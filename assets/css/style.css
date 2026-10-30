@@ -162,6 +162,14 @@ a {
   background: var(--hero-overlay);
 }
 
+.hero.menu-open {
+  overflow: visible;
+}
+
+.hero.menu-open .hero__bg {
+  animation: none;
+}
+
 /* ---------- Header ---------- */
 .header {
   position: relative;

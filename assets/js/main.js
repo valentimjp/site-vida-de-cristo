@@ -4,6 +4,8 @@ const nav = document.getElementById("nav");
 navToggle.addEventListener("click", () => {
   const open = nav.classList.toggle("is-open");
   navToggle.setAttribute("aria-expanded", open);
+  // O hero corta o que passa dele; com o menu aberto, libera para não esconder as abas
+  nav.closest(".hero").classList.toggle("menu-open", open);
 });
 
 // Copiar chave Pix (página Ofertas)
