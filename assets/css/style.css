@@ -221,7 +221,7 @@ a {
 .nav__list {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1276,6 +1276,19 @@ a {
 .give__holder strong {
   font-weight: 500;
   color: var(--white);
+}
+
+/* ---------- Página Loja ---------- */
+.store {
+  padding: 72px 0 110px;
+  text-align: center;
+}
+
+.store__text {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-light);
 }
 
 /* ---------- Animations ---------- */
