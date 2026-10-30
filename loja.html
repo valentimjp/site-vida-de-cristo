@@ -59,11 +59,39 @@
 
   <!-- LOJA -->
   <section class="store">
-    <div class="container store__inner reveal">
-      <h2 class="section-title">Em breve</h2>
-      <p class="store__text">Estamos preparando a loja do Ministério Vida de Cristo.</p>
+    <div class="container">
+      <p class="store__text">Escolha os produtos, adicione ao carrinho e envie seu pedido pelo Instagram.</p>
+      <!-- Produtos: a lista fica em assets/js/loja.js -->
+      <div class="catalog reveal" id="catalog"></div>
     </div>
   </section>
+
+  <!-- CARRINHO -->
+  <button type="button" class="cart-toggle" id="cartOpen" aria-label="Abrir carrinho">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.5l2.2 11h10.6l2-8H6.3"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="16.5" cy="19.5" r="1.5"/></svg>
+    <span class="cart-toggle__label">Carrinho</span>
+    <span id="cartCount">0</span>
+  </button>
+
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+
+  <aside class="cart" id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="cart__head">
+      <h2 class="cart__title" id="cartTitle">Seu carrinho</h2>
+      <button type="button" class="cart__close" id="cartClose" aria-label="Fechar carrinho">&times;</button>
+    </div>
+
+    <p class="cart__empty" id="cartEmpty">Seu carrinho está vazio.</p>
+    <ul class="cart__items" id="cartItems"></ul>
+
+    <div class="cart__footer" id="cartFooter" hidden>
+      <p class="cart__total" id="cartTotal" hidden></p>
+      <a class="btn btn--primary cart__send" id="cartSend" target="_blank" rel="noopener">Pedir pelo Instagram</a>
+      <p class="cart__hint">Copiamos seu pedido e abrimos a conversa com a Igreja. É só colar e enviar.</p>
+      <p class="cart__status" id="cartStatus" role="status"></p>
+      <textarea class="cart__manual" id="cartManual" rows="6" readonly hidden aria-label="Texto do pedido"></textarea>
+    </div>
+  </aside>
   <!-- RODAPÉ -->
   <footer class="footer">
     <div class="container footer__grid">
@@ -118,6 +146,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/loja.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
