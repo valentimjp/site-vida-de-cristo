@@ -60,7 +60,7 @@
   <!-- LOJA -->
   <section class="store">
     <div class="container">
-      <p class="store__text">Escolha os produtos, adicione ao carrinho e envie seu pedido pelo Instagram.</p>
+      <p class="store__text">Escolha o produto, adicione ao carrinho e finalize seu pedido pelo Instagram.</p>
       <!-- Produtos: a lista fica em assets/js/loja.js -->
       <div class="catalog reveal" id="catalog"></div>
     </div>
@@ -86,8 +86,22 @@
 
     <div class="cart__footer" id="cartFooter" hidden>
       <p class="cart__total" id="cartTotal" hidden></p>
+      <fieldset class="pay">
+        <legend class="pay__title">Forma de pagamento</legend>
+        <label class="pay__option"><input type="radio" name="payment" value="pix" checked> Pix</label>
+        <label class="pay__option"><input type="radio" name="payment" value="cartao"> Cartão de crédito</label>
+      </fieldset>
+
+      <div class="cart__pix" id="cartPix">
+        <div>
+          <p class="cart__pix-label">Chave Pix (CNPJ)</p>
+          <p class="cart__pix-key">55.498.200/0001-08</p>
+        </div>
+        <button type="button" class="cart__pix-copy" id="cartPixCopy" data-key="55498200000108">Copiar</button>
+      </div>
+
       <a class="btn btn--primary cart__send" id="cartSend" target="_blank" rel="noopener">Pedir pelo Instagram</a>
-      <p class="cart__hint">Copiamos seu pedido e abrimos a conversa com a Igreja. É só colar e enviar.</p>
+      <p class="cart__hint" id="cartHint"></p>
       <p class="cart__status" id="cartStatus" role="status"></p>
       <textarea class="cart__manual" id="cartManual" rows="6" readonly hidden aria-label="Texto do pedido"></textarea>
     </div>

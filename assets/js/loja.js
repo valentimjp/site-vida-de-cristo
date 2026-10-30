@@ -5,9 +5,10 @@ const PRODUCTS = [
     id: "livro-transformados",
     name: "Transformados",
     author: "Frederico Gurgel",
-    category: "Livro",
+    category: "eBook",
     image: "assets/img/livro-transformados.jpg",
-    price: null,
+    price: 10,
+    digital: true,
   },
 ];
 
@@ -27,6 +28,24 @@ const cartTotal = document.getElementById("cartTotal");
 const cartSend = document.getElementById("cartSend");
 const cartStatus = document.getElementById("cartStatus");
 const cartManual = document.getElementById("cartManual");
+const cartHint = document.getElementById("cartHint");
+const cartPix = document.getElementById("cartPix");
+const cartPixCopy = document.getElementById("cartPixCopy");
+
+const PAYMENTS = {
+  pix: {
+    label: "Pix",
+    hint: "Pague com a chave acima e toque em Pedir pelo Instagram. Depois é só colar o pedido na conversa e enviar o comprovante.",
+    closing: "Vou enviar o comprovante do Pix aqui para receber o eBook.",
+  },
+  cartao: {
+    label: "Cartão de crédito",
+    hint: "Copiamos seu pedido e abrimos a conversa com a Igreja. Lá enviamos o link seguro para pagar com cartão. Nunca mande os dados do cartão por mensagem.",
+    closing: "Pode me enviar o link de pagamento do cartão?",
+  },
+};
+
+const selectedPayment = () => document.querySelector('input[name="payment"]:checked').value;
 
 const money = (value) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const findProduct = (id) => PRODUCTS.find((product) => product.id === id);
@@ -38,7 +57,8 @@ function loadCart() {
     const cart = {};
     Object.keys(saved).forEach((id) => {
       const quantity = Number(saved[id]);
-      if (findProduct(id) && Number.isInteger(quantity) && quantity > 0) cart[id] = quantity;
+      const product = findProduct(id);
+      if (product && Number.isInteger(quantity) && quantity > 0) cart[id] = product.digital ? 1 : quantity;
     });
     return cart;
   } catch {
@@ -83,17 +103,22 @@ function renderCatalog() {
     price.className = "product__price";
     price.textContent = product.price === null ? "Consulte o valor" : money(product.price);
 
+    const delivery = document.createElement("p");
+    delivery.className = "product__delivery";
+    delivery.textContent = "Entrega digital pelo Instagram";
+    delivery.hidden = !product.digital;
+
     const button = document.createElement("button");
     button.type = "button";
     button.className = "btn btn--primary product__add";
     button.textContent = "Adicionar ao carrinho";
     button.addEventListener("click", () => {
-      cart[product.id] = (cart[product.id] || 0) + 1;
+      cart[product.id] = product.digital ? 1 : (cart[product.id] || 0) + 1;
       updateCart();
       openCart();
     });
 
-    card.append(image, category, name, author, price, button);
+    card.append(image, category, name, author, price, delivery, button);
     catalog.appendChild(card);
   });
 }
@@ -154,12 +179,16 @@ function renderCartItems() {
       updateCart();
     });
 
-    controls.append(
-      quantityButton(`Diminuir quantidade de ${product.name}`, "−", () => changeQuantity(id, -1)),
-      quantity,
-      quantityButton(`Aumentar quantidade de ${product.name}`, "+", () => changeQuantity(id, 1)),
-      remove
-    );
+    if (product.digital) {
+      controls.append(remove);
+    } else {
+      controls.append(
+        quantityButton(`Diminuir quantidade de ${product.name}`, "−", () => changeQuantity(id, -1)),
+        quantity,
+        quantityButton(`Aumentar quantidade de ${product.name}`, "+", () => changeQuantity(id, 1)),
+        remove
+      );
+    }
     info.append(name, price, controls);
     item.append(image, info);
     cartItems.appendChild(item);
@@ -174,8 +203,10 @@ function orderMessage() {
   });
   const parts = ["Olá! Gostaria de fazer este pedido pelo site:", "", ...lines];
   const total = orderTotal();
-  if (total !== null) parts.push("", `Total: ${money(total)}`);
-  parts.push("", "Como faço para receber?");
+  const payment = PAYMENTS[selectedPayment()];
+  parts.push("");
+  if (total !== null) parts.push(`Total: ${money(total)}`);
+  parts.push(`Pagamento: ${payment.label}`, "", payment.closing);
   return parts.join("\n");
 }
 
@@ -221,6 +252,30 @@ function closeCart() {
   cartOpen.focus();
 }
 
+function updatePayment() {
+  const method = selectedPayment();
+  cartPix.hidden = method !== "pix";
+  cartHint.textContent = PAYMENTS[method].hint;
+  cartStatus.textContent = "";
+  cartManual.hidden = true;
+}
+
+document.querySelectorAll('input[name="payment"]').forEach((option) => {
+  option.addEventListener("change", updatePayment);
+});
+
+cartPixCopy.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(cartPixCopy.dataset.key);
+    cartPixCopy.textContent = "Copiada!";
+  } catch {
+    cartPixCopy.textContent = "Copie: " + cartPixCopy.dataset.key;
+  }
+  setTimeout(() => {
+    cartPixCopy.textContent = "Copiar";
+  }, 2500);
+});
+
 cartOpen.addEventListener("click", openCart);
 cartClose.addEventListener("click", closeCart);
 cartBackdrop.addEventListener("click", closeCart);
@@ -244,3 +299,4 @@ cartSend.addEventListener("click", async () => {
 
 renderCatalog();
 updateCart();
+updatePayment();

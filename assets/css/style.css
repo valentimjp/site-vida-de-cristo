@@ -1343,6 +1343,82 @@ a {
   cursor: pointer;
 }
 
+.product__delivery {
+  margin: -12px 0 18px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.pay {
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+}
+
+.pay__title {
+  padding: 0;
+  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.pay__option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.pay__option input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--gold);
+}
+
+.cart__pix {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+}
+
+.cart__pix[hidden] {
+  display: none;
+}
+
+.cart__pix-label {
+  margin: 0 0 2px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.cart__pix-key {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.cart__pix-copy {
+  flex-shrink: 0;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 14px;
+  cursor: pointer;
+}
+
 /* Carrinho */
 .cart-toggle {
   position: fixed;
