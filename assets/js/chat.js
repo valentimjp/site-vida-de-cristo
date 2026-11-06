@@ -1,5 +1,5 @@
 // Assistente de compra da Loja: conversa guiada por botões, sem servidor.
-// Usa PRODUCTS, PAYMENTS, money e INSTAGRAM_DM de loja.js (carregado antes).
+// Usa PRODUCTS, money, ORDER_EMAIL, PIX_KEY, PIX_KEY_LABEL e INSTAGRAM_DM de loja.js (carregado antes).
 
 const chatOpen = document.getElementById("chatOpen");
 const chatPanel = document.getElementById("chatPanel");
@@ -7,10 +7,9 @@ const chatClose = document.getElementById("chatClose");
 const chatLog = document.getElementById("chatLog");
 const chatActions = document.getElementById("chatActions");
 
-const pixKey = document.getElementById("cartPixCopy").dataset.key;
-const pixKeyLabel = document.querySelector(".cart__pix-key").textContent;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const order = { product: null, name: "", payment: null };
+const order = { product: null, name: "", email: "" };
 let started = false;
 
 // Rola até a última mensagem depois que o layout (inclusive os botões) se ajusta
@@ -54,10 +53,10 @@ function addProductCard(product) {
 // Mostra as opções da etapa atual; ao escolher, a opção vira uma fala da pessoa
 function setOptions(options) {
   chatActions.textContent = "";
-  options.forEach(({ label, action }) => {
+  options.forEach(({ label, action, primary }) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "chat__option";
+    button.className = primary ? "chat__option chat__option--primary" : "chat__option";
     button.textContent = label;
     button.addEventListener("click", () => {
       addMessage(label, "user");
@@ -69,18 +68,18 @@ function setOptions(options) {
   scrollToEnd();
 }
 
-function askText(label, placeholder, onSubmit) {
+function askText({ label, placeholder, type = "text", autocomplete, validate, onSubmit }) {
   chatActions.textContent = "";
   const form = document.createElement("form");
   form.className = "chat__form";
+  form.noValidate = true;
 
   const input = document.createElement("input");
-  input.type = "text";
+  input.type = type;
   input.className = "chat__input";
   input.placeholder = placeholder;
-  input.maxLength = 60;
-  input.required = true;
-  input.autocomplete = "given-name";
+  input.maxLength = 80;
+  input.autocomplete = autocomplete;
   input.setAttribute("aria-label", label);
 
   const send = document.createElement("button");
@@ -88,11 +87,20 @@ function askText(label, placeholder, onSubmit) {
   send.className = "btn btn--primary chat__send";
   send.textContent = "Enviar";
 
-  form.append(input, send);
+  const error = document.createElement("p");
+  error.className = "chat__error";
+  error.setAttribute("role", "alert");
+
+  form.append(input, send, error);
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const value = input.value.trim();
-    if (!value) return;
+    const problem = value ? validate?.(value) : "Preencha para continuar.";
+    if (problem) {
+      error.textContent = problem;
+      input.focus();
+      return;
+    }
     addMessage(value, "user");
     onSubmit(value);
   });
@@ -107,18 +115,22 @@ function copyText(text) {
   return Promise.race([navigator.clipboard.writeText(text), timeout]);
 }
 
-function chatOrderMessage() {
-  const { product, name, payment } = order;
-  const price = product.price === null ? "" : ` - ${money(product.price)}`;
-  const parts = [
-    `Olá! Meu nome é ${name} e gostaria de fazer este pedido pelo site:`,
+// O e-mail aceita assunto e texto prontos no link: a pessoa só anexa o comprovante e envia.
+function orderMailto() {
+  const { product, name, email } = order;
+  const subject = `Pedido pelo site: ${product.name}`;
+  const body = [
+    "Olá! Fiz um pedido pelo site do Ministério Vida de Cristo:",
     "",
-    `• 1x ${product.name} (${product.author})${price}`,
+    `Nome: ${name}`,
+    `E-mail para receber o eBook: ${email}`,
+    `Produto: ${product.name} (${product.author})`,
+    `Valor: ${money(product.price)}`,
+    "Pagamento: Pix",
     "",
-  ];
-  if (product.price !== null) parts.push(`Total: ${money(product.price)}`);
-  parts.push(`Pagamento: ${PAYMENTS[payment].label}`, "", PAYMENTS[payment].closing);
-  return parts.join("\n");
+    "Segue em anexo o comprovante do Pix.",
+  ].join("\n");
+  return `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 // ---------- Etapas da conversa ----------
@@ -130,7 +142,7 @@ function stepStart() {
 
 function stepMenu() {
   setOptions([
-    { label: "Quero comprar", action: stepChooseProduct },
+    { label: "Quero comprar", action: stepChooseProduct, primary: true },
     { label: "Conhecer os produtos", action: stepAbout },
     { label: "Como recebo o eBook?", action: stepDelivery },
     { label: "Falar com a Igreja", action: stepTalk },
@@ -143,21 +155,21 @@ function stepAbout() {
     if (product.description) addMessage(product.description);
   });
   setOptions([
-    { label: "Quero comprar", action: stepChooseProduct },
+    { label: "Quero comprar", action: stepChooseProduct, primary: true },
     { label: "Voltar ao início", action: stepBack },
   ]);
 }
 
 function stepDelivery() {
-  addMessage("É um eBook em PDF. Assim que confirmarmos o pagamento, enviamos o arquivo pela conversa do Instagram da Igreja.");
+  addMessage("É um eBook em PDF. Você paga por Pix e envia o comprovante por e-mail. Assim que conferirmos o pagamento, mandamos o PDF para o seu e-mail.");
   setOptions([
-    { label: "Quero comprar", action: stepChooseProduct },
+    { label: "Quero comprar", action: stepChooseProduct, primary: true },
     { label: "Voltar ao início", action: stepBack },
   ]);
 }
 
 function stepTalk() {
-  addMessage("Vou abrir a conversa com a Igreja no Instagram.");
+  addMessage(`Você pode escrever para a Igreja no e-mail ${ORDER_EMAIL} ou pelo Instagram. Vou abrir a conversa no Instagram.`);
   window.open(INSTAGRAM_DM, "_blank", "noopener");
   setOptions([{ label: "Voltar ao início", action: stepBack }]);
 }
@@ -169,103 +181,108 @@ function stepBack() {
 
 function stepChooseProduct() {
   if (PRODUCTS.length === 1) {
-    order.product = PRODUCTS[0];
-    addProductCard(order.product);
-    stepName();
+    choose(PRODUCTS[0]);
     return;
   }
   addMessage("Qual produto você quer?");
-  setOptions(
-    PRODUCTS.map((product) => ({
-      label: product.name,
-      action: () => {
-        order.product = product;
-        stepName();
-      },
-    }))
-  );
+  setOptions(PRODUCTS.map((product) => ({ label: product.name, action: () => choose(product) })));
+}
+
+function choose(product) {
+  order.product = product;
+  addProductCard(product);
+  stepName();
 }
 
 function stepName() {
   addMessage("Ótima escolha! Qual é o seu nome?");
-  askText("Seu nome", "Digite seu nome", (name) => {
-    order.name = name;
-    stepPayment();
+  askText({
+    label: "Seu nome",
+    placeholder: "Digite seu nome",
+    autocomplete: "name",
+    onSubmit: (name) => {
+      order.name = name;
+      stepEmail();
+    },
   });
 }
 
-function stepPayment() {
-  addMessage(`Prazer, ${order.name}! Como você prefere pagar?`);
-  setOptions([
-    { label: "Pix", action: () => stepPix() },
-    { label: "Cartão de crédito", action: () => stepCard() },
-  ]);
+function stepEmail() {
+  addMessage(`Prazer, ${order.name}! Qual e-mail devemos usar para enviar o eBook?`);
+  askText({
+    label: "Seu e-mail",
+    placeholder: "seuemail@exemplo.com",
+    type: "email",
+    autocomplete: "email",
+    validate: (email) => (EMAIL_PATTERN.test(email) ? "" : "Confira o e-mail. Exemplo: maria@gmail.com"),
+    onSubmit: (email) => {
+      order.email = email;
+      stepPix();
+    },
+  });
 }
 
 function stepPix() {
-  order.payment = "pix";
-  addMessage(`Faça o Pix de ${money(order.product.price)} para a chave da Igreja (CNPJ):
-${pixKeyLabel}`);
-  addMessage("Depois de pagar, toque em Enviar pedido. Vou copiar seu pedido e abrir o Instagram. É só colar na conversa e mandar o comprovante.");
+  addMessage(`Agora é só fazer o Pix de ${money(order.product.price)} para a chave da Igreja (CNPJ):\n${PIX_KEY_LABEL}`);
+  addMessage("Quando terminar, toque em Já fiz o Pix.");
   setOptions([
     { label: "Copiar chave Pix", action: copyPixKey },
-    { label: "Enviar pedido", action: sendOrder },
-    { label: "Trocar forma de pagamento", action: stepPayment },
-  ]);
-}
-
-function stepCard() {
-  order.payment = "cartao";
-  addMessage("Pelo Instagram, a Igreja envia um link seguro para você pagar com cartão. Nunca mande os dados do cartão por mensagem.");
-  addMessage("Toque em Enviar pedido. Vou copiar seu pedido e abrir o Instagram. É só colar na conversa.");
-  setOptions([
-    { label: "Enviar pedido", action: sendOrder },
-    { label: "Trocar forma de pagamento", action: stepPayment },
+    { label: "Já fiz o Pix", action: stepReceipt, primary: true },
+    { label: "Corrigir meus dados", action: stepName },
   ]);
 }
 
 async function copyPixKey() {
   try {
-    await copyText(pixKey);
-    addMessage("Chave Pix copiada! Agora é só colar no app do seu banco.");
+    await copyText(PIX_KEY);
+    addMessage("Chave Pix copiada! Cole no app do seu banco.");
   } catch {
-    addMessage(`Não consegui copiar sozinho. Copie a chave: ${pixKey}`);
+    addMessage(`Não consegui copiar sozinho. A chave é: ${PIX_KEY_LABEL}`);
   }
-  stepPixAfterCopy();
-}
-
-function stepPixAfterCopy() {
   setOptions([
-    { label: "Enviar pedido", action: sendOrder },
-    { label: "Trocar forma de pagamento", action: stepPayment },
+    { label: "Já fiz o Pix", action: stepReceipt, primary: true },
+    { label: "Corrigir meus dados", action: stepName },
   ]);
 }
 
-// O Instagram não aceita mensagem pronta no link: o pedido vai copiado para a pessoa colar.
-// Copia antes de abrir a nova aba, porque a cópia falha quando a página perde o foco.
-async function sendOrder() {
-  const message = chatOrderMessage();
-  let copied = true;
+function stepReceipt() {
+  addMessage("Falta só um passo: enviar o comprovante.");
+  addMessage("Toque em Enviar comprovante. Seu e-mail vai abrir com a mensagem pronta para a Igreja. É só anexar o comprovante do Pix e enviar.");
+  setOptions([
+    { label: "Enviar comprovante", action: openReceiptEmail, primary: true },
+    { label: "Corrigir meus dados", action: stepName },
+  ]);
+}
+
+function openReceiptEmail() {
+  window.location.href = orderMailto();
+  addMessage(`Pronto! Assim que conferirmos o pagamento, enviamos o eBook para ${order.email}.`);
+  addMessage(`Se o seu e-mail não abriu, envie o comprovante para ${ORDER_EMAIL}, com seu nome e o e-mail para receber o eBook.`);
+  setOptions([
+    { label: "Copiar e-mail da Igreja", action: copyOrderEmail },
+    { label: "Começar de novo", action: stepBack },
+  ]);
+}
+
+async function copyOrderEmail() {
   try {
-    await copyText(message);
+    await copyText(ORDER_EMAIL);
+    addMessage("E-mail da Igreja copiado!");
   } catch {
-    copied = false;
-  }
-  window.open(INSTAGRAM_DM, "_blank", "noopener");
-  if (copied) {
-    addMessage("Pronto! Copiei seu pedido e abri o Instagram. Cole na conversa e envie.");
-  } else {
-    addMessage("Abri o Instagram, mas não consegui copiar o pedido. Copie o texto abaixo e cole na conversa:");
-    addMessage(message).classList.add("chat__msg--order");
+    addMessage(`O e-mail da Igreja é: ${ORDER_EMAIL}`);
   }
   setOptions([{ label: "Começar de novo", action: stepBack }]);
 }
 
 // ---------- Abrir e fechar ----------
 
-function openChat() {
+function showChat() {
   chatPanel.hidden = false;
   chatOpen.setAttribute("aria-expanded", "true");
+}
+
+function openChat() {
+  showChat();
   if (!started) {
     started = true;
     stepStart();
@@ -278,6 +295,15 @@ function closeChat() {
   chatPanel.hidden = true;
   chatOpen.setAttribute("aria-expanded", "false");
   chatOpen.focus();
+}
+
+// Chamado pelo botão Comprar do catálogo: começa a conversa já com o produto escolhido
+function startPurchase(product) {
+  showChat();
+  chatLog.textContent = "";
+  started = true;
+  addMessage("Olá! Vou te ajudar a fazer seu pedido.");
+  choose(product);
 }
 
 chatOpen.addEventListener("click", () => (chatPanel.hidden ? openChat() : closeChat()));

@@ -60,18 +60,11 @@
   <!-- LOJA -->
   <section class="store">
     <div class="container">
-      <p class="store__text">Escolha o produto, adicione ao carrinho e finalize seu pedido pelo Instagram.</p>
+      <p class="store__text">Toque em Comprar e o nosso assistente te guia. O pagamento é por Pix e o eBook chega no seu e-mail.</p>
       <!-- Produtos: a lista fica em assets/js/loja.js -->
       <div class="catalog reveal" id="catalog"></div>
     </div>
   </section>
-
-  <!-- CARRINHO -->
-  <button type="button" class="cart-toggle" id="cartOpen" aria-label="Abrir carrinho">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.5l2.2 11h10.6l2-8H6.3"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="16.5" cy="19.5" r="1.5"/></svg>
-    <span class="cart-toggle__label">Carrinho</span>
-    <span id="cartCount">0</span>
-  </button>
 
   <!-- ASSISTENTE DE COMPRA -->
   <button type="button" class="chat-toggle" id="chatOpen" aria-controls="chatPanel" aria-expanded="false">
@@ -88,39 +81,6 @@
     <div class="chat__actions" id="chatActions"></div>
   </section>
 
-  <div class="cart-backdrop" id="cartBackdrop"></div>
-
-  <aside class="cart" id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
-    <div class="cart__head">
-      <h2 class="cart__title" id="cartTitle">Seu carrinho</h2>
-      <button type="button" class="cart__close" id="cartClose" aria-label="Fechar carrinho">&times;</button>
-    </div>
-
-    <p class="cart__empty" id="cartEmpty">Seu carrinho está vazio.</p>
-    <ul class="cart__items" id="cartItems"></ul>
-
-    <div class="cart__footer" id="cartFooter" hidden>
-      <p class="cart__total" id="cartTotal" hidden></p>
-      <fieldset class="pay">
-        <legend class="pay__title">Forma de pagamento</legend>
-        <label class="pay__option"><input type="radio" name="payment" value="pix" checked> Pix</label>
-        <label class="pay__option"><input type="radio" name="payment" value="cartao"> Cartão de crédito</label>
-      </fieldset>
-
-      <div class="cart__pix" id="cartPix">
-        <div>
-          <p class="cart__pix-label">Chave Pix (CNPJ)</p>
-          <p class="cart__pix-key">55.498.200/0001-08</p>
-        </div>
-        <button type="button" class="cart__pix-copy" id="cartPixCopy" data-key="55498200000108">Copiar</button>
-      </div>
-
-      <a class="btn btn--primary cart__send" id="cartSend" target="_blank" rel="noopener">Pedir pelo Instagram</a>
-      <p class="cart__hint" id="cartHint"></p>
-      <p class="cart__status" id="cartStatus" role="status"></p>
-      <textarea class="cart__manual" id="cartManual" rows="6" readonly hidden aria-label="Texto do pedido"></textarea>
-    </div>
-  </aside>
   <!-- RODAPÉ -->
   <footer class="footer">
     <div class="container footer__grid">
