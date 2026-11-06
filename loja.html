@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="assets/img/logo-arvore.png">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/preview.js"></script>
 </head>
 <body>
 
@@ -32,7 +33,7 @@
             <li><a href="quem-somos.html" class="nav__link">Quem Somos</a></li>
             <li><a href="cultos.html" class="nav__link">Cultos</a></li>
             <li><a href="ofertas.html" class="nav__link">Contribuição</a></li>
-            <li><a href="loja.html" class="nav__link is-active">Loja</a></li>
+            <li class="so-previa"><a href="loja.html" class="nav__link is-active">Loja</a></li>
           </ul>
         </nav>
 
@@ -58,7 +59,16 @@
   </section>
 
   <!-- LOJA -->
-  <section class="store">
+  <!-- Público: a Loja ainda não abriu -->
+  <section class="store so-publico">
+    <div class="container store__soon">
+      <h2 class="section-title">Em breve</h2>
+      <p class="store__text">Estamos preparando a loja do Ministério Vida de Cristo.</p>
+    </div>
+  </section>
+
+  <!-- Só no modo prévia (assets/js/preview.js) -->
+  <section class="store so-previa">
     <div class="container">
       <p class="store__text">Toque em Comprar e o nosso assistente te guia. O pagamento é por Pix e o eBook chega no seu e-mail.</p>
       <!-- Produtos: a lista fica em assets/js/loja.js -->
@@ -67,12 +77,12 @@
   </section>
 
   <!-- ASSISTENTE DE COMPRA -->
-  <button type="button" class="chat-toggle" id="chatOpen" aria-controls="chatPanel" aria-expanded="false">
+  <button type="button" class="chat-toggle so-previa" id="chatOpen" aria-controls="chatPanel" aria-expanded="false">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
     <span class="chat-toggle__label">Ajuda para comprar</span>
   </button>
 
-  <section class="chat" id="chatPanel" aria-labelledby="chatTitle" hidden>
+  <section class="chat so-previa" id="chatPanel" aria-labelledby="chatTitle" hidden>
     <div class="chat__head">
       <h2 class="chat__title" id="chatTitle">Assistente da Loja</h2>
       <button type="button" class="chat__close" id="chatClose" aria-label="Fechar assistente">&times;</button>
@@ -107,7 +117,7 @@
           <li><a href="quem-somos.html">Quem Somos</a></li>
           <li><a href="cultos.html">Cultos</a></li>
           <li><a href="ofertas.html">Contribuição</a></li>
-          <li><a href="loja.html">Loja</a></li>
+          <li class="so-previa"><a href="loja.html">Loja</a></li>
         </ul>
       </div>
 
@@ -136,6 +146,8 @@
   </footer>
 
   <script src="assets/js/loja.js"></script>
+  <script src="assets/js/vendor/qrcode.js"></script>
+  <script src="assets/js/pix.js"></script>
   <script src="assets/js/chat.js"></script>
   <script src="assets/js/main.js"></script>
 </body>

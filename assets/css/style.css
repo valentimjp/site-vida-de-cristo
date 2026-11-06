@@ -1279,6 +1279,19 @@ a {
 }
 
 /* ---------- Página Loja ---------- */
+/* Modo prévia (assets/js/preview.js): a Loja só aparece com a classe .previa no <html> */
+html:not(.previa) .so-previa {
+  display: none !important;
+}
+
+html.previa .so-publico {
+  display: none !important;
+}
+
+.store__soon {
+  text-align: center;
+}
+
 .store {
   padding: 48px 0 110px;
 }
@@ -1537,6 +1550,64 @@ a {
 
 .chat__error:empty {
   display: none;
+}
+
+.chat__qr {
+  align-self: flex-start;
+  margin: 0;
+  padding: 10px;
+  background: var(--white);
+  text-align: center;
+}
+
+.chat__qr img {
+  display: block;
+  width: 180px;
+  height: 180px;
+  image-rendering: pixelated;
+}
+
+.chat__qr p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--text-dark);
+}
+
+/* Campo de arquivo escondido: o botão visível é o <label> "Escolher comprovante" */
+.chat__file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+label.chat__option {
+  display: inline-flex;
+  align-items: center;
+}
+
+.chat__file:focus-visible + label.chat__option,
+label.chat__option:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.chat__file-name {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+}
+
+.chat__file-name:empty {
+  display: none;
+}
+
+.chat__send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .chat__form {

@@ -13,10 +13,9 @@ const PRODUCTS = [
   },
 ];
 
-// A compra é feita pelo assistente (chat.js): Pix + comprovante por e-mail para a Igreja.
+// A compra é feita pelo assistente (chat.js): Pix com valor + comprovante enviado pelo site (api/pedido.js).
 const ORDER_EMAIL = "min.vidadecristo@gmail.com";
 const PIX_KEY = "55498200000108";
-const PIX_KEY_LABEL = "55.498.200/0001-08";
 const INSTAGRAM_DM = "https://ig.me/m/vidadecristo_ofc";
 
 const money = (value) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
