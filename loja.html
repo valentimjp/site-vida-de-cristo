@@ -73,6 +73,21 @@
     <span id="cartCount">0</span>
   </button>
 
+  <!-- ASSISTENTE DE COMPRA -->
+  <button type="button" class="chat-toggle" id="chatOpen" aria-controls="chatPanel" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+    <span class="chat-toggle__label">Ajuda para comprar</span>
+  </button>
+
+  <section class="chat" id="chatPanel" aria-labelledby="chatTitle" hidden>
+    <div class="chat__head">
+      <h2 class="chat__title" id="chatTitle">Assistente da Loja</h2>
+      <button type="button" class="chat__close" id="chatClose" aria-label="Fechar assistente">&times;</button>
+    </div>
+    <div class="chat__log" id="chatLog" aria-live="polite"></div>
+    <div class="chat__actions" id="chatActions"></div>
+  </section>
+
   <div class="cart-backdrop" id="cartBackdrop"></div>
 
   <aside class="cart" id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
@@ -161,6 +176,7 @@
   </footer>
 
   <script src="assets/js/loja.js"></script>
+  <script src="assets/js/chat.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -9,6 +9,8 @@ const PRODUCTS = [
     image: "assets/img/livro-transformados.jpg",
     price: 10,
     digital: true,
+    description:
+      "Com base bíblica e linguagem acessível, o Pastor Frederico Gurgel mostra como a alma foi criada, por que foi ferida e como pode ser restaurada pelo Espírito Santo. eBook em PDF, com 72 páginas.",
   },
 ];
 
