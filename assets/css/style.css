@@ -221,7 +221,7 @@ a {
 .nav__list {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 24px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -231,7 +231,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 400;
   color: var(--text-light);
   transition: color 0.2s ease;
